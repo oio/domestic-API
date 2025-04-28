@@ -8,9 +8,7 @@ uv sync
 
 ### .env file
 ```
-ARENA_TOKEN = arena_api_token
-ARENA2DISCORD_URL = link_to_the_arena_to_discord_spreadsheet
-FIREBASE_SERVICE_ACCOUNT = b64_service_account
+PREFIX = roby # or whatever name for your bot
 ```
 
 ## Run

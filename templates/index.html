@@ -1,0 +1,6 @@
+<h1>Domestic API</h1>
+<ul>
+	{% for route in routes %}
+		<li>{{ route.path }} - {{ route.method }}</li>
+	{% endfor %}
+</ul>
