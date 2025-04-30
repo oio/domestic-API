@@ -53,6 +53,7 @@ all_routes = [
     Route("pong", "POST", callbacks.error, None, description="Pong"),
     Route(f"{prefix.strip()}", "POST", callbacks.roby, PromptRequest, description="💬 Ask roby", preview=f"💬 /{prefix.strip()}"),
     Route("rembg", "POST", callbacks.rembg, RemoveBgRequest, description="🖼️ Remove background", preview="🖼️ /removebg"),
+    Route(f"thanks", "POST", callbacks.thanks, None, description="Thanks", preview="🙏 Thanks", is_slash_command=False),
     Route(f"thanks {prefix.strip()}", "POST", callbacks.thanks, None, description="Thanks", preview="🙏 Thanks", is_slash_command=False),
     Route(f"thank you {prefix.strip()}", "POST", callbacks.thanks, None, description="Thanks", preview="🙏 Thanks", is_slash_command=False),
     Route("throw", "POST", callbacks.throw, ThrowRequest, description="🎲 Dice throw", preview="🎲 /throw"),
