@@ -56,7 +56,7 @@ async def haiku(request):
 	response = await utils.query_llm(prompt)
 	return {"result": response}
 
-async def help(request): # TODO
+async def help(request): 
 	return {"result": "Not implemented"}
 	system_prompt = "You are a icebreaker bot helping people to break the ice in a conversation. You'll be asked to generate a question the user can answer with a single word or phrase. Just reply with the question. EXAMPLES 'What is your favorite movie?', 'What's your favorite flower?' 'Dog or cat?'. Ask very unusual and funny questions (AVOID TRAVEL DESTINATIONS AND SERIOUS TOPICS)"
 	answer_system_prompt = "You are a icebreaker bot. You just asked a question to break the ice. You also need to answer the question with a single word or phrase to give an example. USE FORMULAS LIKE 'mine is ...', 'for me it's ...', 'i personally prefer ...'"
