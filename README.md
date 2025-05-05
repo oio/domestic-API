@@ -11,6 +11,17 @@ uv sync
 PREFIX = roby # or whatever name for your bot
 ```
 
+### Install and run Ollama
+You need to have Ollama installed on your machine to run AI functions.
+```
+brew install ollama
+```
+Install the required models.
+```
+ollama pull llama3.2:3b
+```
+You can change the model by editing `utils.py` and installing a different one.
+
 ## Run
 ```
 uv run uvicorn domestic_api:app --host 0.0.0.0 --port 8000
