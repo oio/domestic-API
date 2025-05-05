@@ -27,6 +27,9 @@ You can change the model by editing `utils.py` and installing a different one.
 uv run uvicorn domestic_api:app --host 0.0.0.0 --port 8000
 ```
 
+## Endpoints documentation
+The endpoints are documented with Swagger. You can access the documentation at `http://0.0.0.0:8000/docs`.
+
 ## Implement new endpoints
 Update `all_routes` in routes.py
 ```python
