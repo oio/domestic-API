@@ -7,8 +7,10 @@ uv sync
 ```
 
 ### .env file
+You need to create a `.env` file in the root of the project and set the following variables.
 ```
 PREFIX = roby # or whatever name for your bot
+OLLAMA_MODEL = llama3.2:3b # or whatever model you want to use
 ```
 
 ### Install and run Ollama

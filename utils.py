@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import logging
 import ollama
 from ollama import chat
+import os
 from operations_queue import queue_llm, queue_image
 import tools
 
@@ -15,34 +16,38 @@ ollama_client = ollama.AsyncClient("http://0.0.0.0:11434")
 LLM / GENERATIVE AI
 """
 
-async def query_llm(prompt, system_prompt=None, model="llama3.2:3b"):
+#async def query_llm(prompt, system_prompt=None, model="llama3.2:3b"):
+async def query_llm(prompt, system_prompt=None):
+	model = os.environ["OLLAMA_MODEL"]
 	response = await ollama_client.generate(model=model, prompt=prompt, system=system_prompt)
 	logger.info(f"Response: {response}")
 	return response.get("response")
 
-async def query_llm_structured(prompt, schema, system_prompt=None, model="llama3.2:3b"):
-		async def _execute_llm_structured(prompt, schema, system_prompt, model):
-			response = chat(
-				model=model,
-				format=schema.model_json_schema(),
-				messages=[
-					{
-						"role": "system",
-						"content": system_prompt
-					},
-					{
-						"role": "user",
-						"content": prompt
-					}
-				], 
-				tools = [tools.now, tools.iso_to_datetime, tools.datetime_to_iso],
-			)
-			parsed_response = schema.model_validate_json(response.message.content)
-			logger.info(f"Parsed response: {parsed_response}")
-			return parsed_response
+#async def query_llm_structured(prompt, schema, system_prompt=None, model="llama3.2:3b"):
+async def query_llm_structured(prompt, schema, system_prompt=None):
+	model = os.environ["OLLAMA_MODEL"]
+	async def _execute_llm_structured(prompt, schema, system_prompt, model):
+		response = chat(
+			model=model,
+			format=schema.model_json_schema(),
+			messages=[
+				{
+					"role": "system",
+					"content": system_prompt
+				},
+				{
+					"role": "user",
+					"content": prompt
+				}
+			], 
+			tools = [tools.now, tools.iso_to_datetime, tools.datetime_to_iso],
+		)
+		parsed_response = schema.model_validate_json(response.message.content)
+		logger.info(f"Parsed response: {parsed_response}")
+		return parsed_response
 		
-		# Queue the structured LLM request
-		return await queue_llm(_execute_llm_structured, prompt, schema, system_prompt, model)
+	# Queue the structured LLM request
+	return await queue_llm(_execute_llm_structured, prompt, schema, system_prompt, model)
 
 async def generate_image(prompt, width=512, height=512):
 	async def _execute_image_gen(prompt, width, height):
