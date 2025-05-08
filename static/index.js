@@ -1,9 +1,13 @@
 const colors = ["#ffdef2", "#f2e2ff", "#e2eeff", "#ddfffc", "#ffffe3"]
-const responseContainer = document.getElementById("response");
+const responseContainer = document.getElementById("response-container");
+const responseTitle = document.getElementById("response-title");
+const responseContent = document.getElementById("response-content");
+
 document.addEventListener("DOMContentLoaded", async () => {
 	const response = await fetch("/api_endpoints");
 	const data = await response.json();
-	const endpoints = data.endpoints;
+	console.log(data);
+	const endpoints = data;
 
 	const endpointsContainer = document.getElementById("endpoints");
 
@@ -64,8 +68,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 				const data = await response.text();
 				console.log(data);
 				const json = JSON.parse(data);
-				responseContainer.textContent = data.result;
-				responseContainer.classList.remove("hidden");
+				responseTitle.textContent = endpoint.path.split("/").pop().replaceAll('_', ' ').replaceAll(/\b\w/g, char => char.toUpperCase());
+				responseContent.textContent = typeof json.result === 'object' ? JSON.stringify(json.result) : json.result;
 			} catch (error) {
 				console.error(error);
 			}
