@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 				inputGroup.appendChild(input);
 				endpointElement.appendChild(inputGroup);
 			});
-
 		}
 		const submitContainer = document.createElement("div");
 		submitContainer.className = "submit-container";

@@ -4,7 +4,7 @@ from typing import Callable, Type
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from params import (
-    HaikuRequest, PromptRequest, RemoveBgRequest, ThrowRequest
+    HaikuRequest, PromptRequest, RemoveBgRequest, ThrowRequest, ImageRequest
 )
 
 load_dotenv()
@@ -47,7 +47,7 @@ all_routes = [
     Route("flip", "POST", callbacks.flip, None, description="🪙 Flip a coin", preview="🪙 /flip"),
     Route("haiku", "POST", callbacks.haiku, HaikuRequest, description="🌸 Create a haiku", preview="🌸 /haiku"),
     Route("help", "POST", callbacks.help, None, description="🛟 All commands", preview="🛟 /help"),
-    Route("image", "POST", callbacks.image, PromptRequest, description="🖼️ Generate an image", preview="🖼️ /image"),
+    Route("image", "POST", callbacks.image, ImageRequest, description="🖼️ Generate an image", preview="🖼️ /image"),
     Route("joke", "POST", callbacks.joke, None, description="🤡 Tell me a joke", preview="🤡 /joke"),
     Route("ping", "POST", callbacks.ping, None, description="Ping"),
     Route("pong", "POST", callbacks.error, None, description="Pong"),

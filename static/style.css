@@ -90,10 +90,10 @@ input {
 	display: flex;
 	justify-content: center;
 
-	width: 25vw;
-	min-width: 25vw;
-	max-width: 25vw;
-	padding: 1.5rem 1rem 1.5rem 0;
+	width: 28vw;
+	min-width: 28vw;
+	max-width: 28vw;
+	padding: 1.5rem 1.5rem 1.5rem 0;
 }
 
 #response {
